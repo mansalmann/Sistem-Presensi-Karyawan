@@ -56,7 +56,7 @@ class User extends Authenticatable implements HasAvatar
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return env('APP_URL') . '/storage/' . $this->image;
+        return $this->image ? env('APP_URL') . '/storage/' . $this->image : $this->avatar_url;
     }
     
 }
