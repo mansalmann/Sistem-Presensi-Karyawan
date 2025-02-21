@@ -25,6 +25,9 @@ class Presensi extends Component
 
         $this->schedule = Schedule::where('user_id', auth()->user()->id)->first();
         $this->attendance = Attendance::where('user_id', auth()->user()->id)->whereDate('created_at', date('Y-m-d'))->first();
+        if(!$this->schedule){
+            return redirect('/admin/schedules');
+        }
     }
 
     public function render()
@@ -86,5 +89,6 @@ class Presensi extends Component
             //     'isInsideRadius' => false
             // ]);
         }
+        return redirect('/admin/schedules');
     }
 }
