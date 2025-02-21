@@ -31,7 +31,9 @@ class ScheduleResource extends Resource
                         Forms\Components\Section::make()
                             ->schema([
                                 Forms\Components\Toggle::make('is_banned')
-                                    ->label('Banned'),
+                                    ->label('Banned')
+                                    ->onColor('danger')
+                                    ->hidden(fn() => !Auth::user()->hasRole('super_admin')),
                                 Forms\Components\Select::make('user_id')
                                     ->relationship('user', 'name')
                                     ->required(),

@@ -24,12 +24,21 @@ class LeaveResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status', 'Pending')->count();
+        
+        if(!Auth::user()->hasRole('super_admin')){
+            return static::getModel()::where('status', 'Pending')->where('user_id', Auth::user()->id)->count();
+        }else{
+            return static::getModel()::where('status', 'Pending')->count();
+        }
     }
 
     public static function getNavigationBadgeColor(): ?string
     {
-        return static::getModel()::where('status', 'Pending')->count() > 5 ? 'danger' : 'warning';
+        if(!Auth::user()->hasRole('super_admin')){
+            return 'warning';
+        }else{
+            return static::getModel()::where('status', 'Pending')->count() > 5 ? 'danger' : 'warning';
+        }
     }
 
     public static function form(Form $form): Form
@@ -61,8 +70,9 @@ class LeaveResource extends Resource
                 ->schema([
                     Forms\Components\Select::make('status')
                         ->options([
-                            'approved' => 'Approved',
-                            'rejected' => 'Rejected',
+                            'Pending' => 'Pending',
+                            'Approved' => 'Approved',
+                            'Rejected' => 'Rejected',
                         ])
                         ->native(false)
                         ->required(),
