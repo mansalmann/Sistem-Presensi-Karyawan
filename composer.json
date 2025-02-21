@@ -7,9 +7,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "bezhansalleh/filament-shield": "^3.3",
         "filament/filament": "^3.2",
+        "humaidem/filament-map-picker": "^0.1.5",
+        "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/pulse": "^1.4",
+        "laravel/tinker": "^2.9",
+        "livewire/livewire": "^3.5",
+        "maatwebsite/excel": "^3.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
